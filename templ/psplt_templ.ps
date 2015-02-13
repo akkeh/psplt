@@ -10,7 +10,7 @@
 % ------------------------------------------------------|
 
 % options:----------------------------------------------| 
-/constr_ratio 1 def % aspect ratio x:y = 1:1
+/constr_ratio 0 def % aspect ratio x:y = 1:1
 /datalabels 0 def   % bool: draw data values (x, y)
 /xlabels 1 def      % bool: draw x values
 /ylabels 1 def      % bool: draw y values
@@ -171,10 +171,10 @@
         } {
             ymin 0 eq   % false; no values < 0?
                 { 
-                    0
+                    margin
                     /ynorm [ ynorm { 2 mul } forall ] def
                 }               
-                { ph } 
+                { ph margin sub } 
             ifelse
         } ifelse
     def % place horizontal axis
@@ -184,10 +184,10 @@
         } {
             xmin 0 eq   % false: no values < 0?
                 { 
-                    0 
+                    margin
                     /xnorm [ xnorm { 2 mul } forall ] def
                 } 
-                { pw }
+                { pw margin sub }
             ifelse
         } ifelse
     def % place vertical axis

@@ -40,10 +40,10 @@ int psplt::write_data() {
 int psplt::write_opts() {
     // write options (for now these are constants)    
     fs << "% options:----------------------------------------------|\n";
-    fs << "/constr_ratio 1 def % aspect ratio x:y = 1:1\n";
+    fs << "/constr_ratio 0 def % aspect ratio x:y = 1:1\n";
     fs << "/datalabels 0 def   % bool: draw data values (x, y)\n";
     fs << "/xlabels 1 def      % bool: draw x values\n";
-    fs << "/ylabels 1 def      % bool: draw y values\n";
+    fs << "/ylabels 0 def      % bool: draw y values\n";
     fs << "% ------------------------------------------------------|\n\n";
 
     // write constants:
@@ -211,10 +211,10 @@ int psplt::write_dproc() {
             fs << "\t\t} {\n";
                 fs << "\t\t\tymin 0 eq   % false; no values < 0?\n";
                     fs << "\t\t\t\t{\n"; 
-                        fs << "\t\t\t\t\t0\n";
+                        fs << "\t\t\t\t\tmargin\n";
                         fs << "\t\t\t\t\t/ynorm [ ynorm { 2 mul } forall ] def\n";
                     fs << "\t\t\t\t}\n";
-                    fs << "\t\t\t\t{ ph }\n";
+                    fs << "\t\t\t\t{ ph margin sub }\n";
                 fs << "\t\t\tifelse\n";
             fs << "\t\t} ifelse\n";
         fs << "\tdef % place horizontal axis\n\n";
@@ -225,10 +225,10 @@ int psplt::write_dproc() {
             fs << "\t\t} {\n";
                 fs << "\t\t\txmin 0 eq   % false: no values < 0?\n";
                     fs << "\t\t\t\t{\n";
-                        fs << "\t\t\t\t\t0\n";
+                        fs << "\t\t\t\t\tmargin\n";
                         fs << "\t\t\t\t\t/xnorm [ xnorm { 2 mul } forall ] def\n";
                     fs << "\t\t\t\t}\n";
-                    fs << "\t\t\t\t{ pw }\n";
+                    fs << "\t\t\t\t{ pw margin sub }\n";
                 fs << "\t\t\tifelse\n";
             fs << "\t\t} ifelse\n";
         fs << "\tdef % place vertical axis\n\n";
